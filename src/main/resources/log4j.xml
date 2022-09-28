@@ -10,14 +10,14 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="snook.spring.mvc">
+	<logger name="jh.spring.mvc">
 		<level value="info" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
-	</logger>
+	</logger>	
 	
 	<logger name="org.springframework.beans">
 		<level value="info" />
@@ -33,7 +33,7 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="warn" />
+		<priority value="info" />
 		<appender-ref ref="console" />
 	</root>
 	
