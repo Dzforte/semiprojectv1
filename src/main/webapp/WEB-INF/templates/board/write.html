@@ -1,48 +1,13 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title> 세미프로젝트 </title>
-<style>
-	
-	/* 전체영역 스타일 */
-	#container { width: 950px; margin:0 auto; border: 1px solid red }
-	
-	/* header 스타일 */
-	nav ul { list-style-type: none; padding-bottom : 30px }
-	nav ul li { float : left; margin-left : 100px; }	
-	hr { clear : both; color: black; height: 3px; background: black }
-	
-	/* main 스타일 */
-	
-	#main { min-height : 500px }
-	
-	
-	/* footer 스타일 */	
-	
-	footer p { text-align: center }
-	
-	/* 링크 스타일 */
-	a { font-weight: bold }
-	a:link { text-decoration: none; color: black }
-	a:visited { text-decoration: none; color: black }
-	a:hover { text-decoration: underline; color: red }
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
 
+<th:block layout:fragment="mystyle"></th:block>
 
-
-
-</style>
-</head>
-<body>
-
-<div id="container">
-<th:block th:include="layout/header"></th:block>
-<div id="main"></div>
-<th:block th:include="layout/footer"></th:block>
-
+<th:block layout:fragment="mystyle">
+<div id="main">
+	<h1>게시판 새 글 쓰기</h1>
 </div>
+</th:block>
 
-<h1>Insert title here</h1>
-
-</body>
-</html>
+<th:block layout:fragment="myscript"></th:block>
