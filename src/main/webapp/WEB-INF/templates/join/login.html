@@ -5,15 +5,62 @@
 <title> 세미프로젝트 </title>
 <link th:href="@{static/css/base.css}" rel="stylesheet">
 
+<style>
+/* 회원가입 폼에 대한 스타일 */
+
+#login { width: 300px; margin:0 auto; }
+#login div { margin-bottom: 10px }
+#login label { width: 110px; display: inline-block; margin-right : 5px;
+			text-align: right; font-weight: bold; padding: 1px }
+#login input { padding: 3px }
+
+button { margin-right : 5px}
+
+</style>
+
 </head>
 <body>
 
 <div id="container">
 <th:block th:include="layout/header"></th:block>
-<div id="main"></div>
+<div id="main">
+<h1>로그인</h1>
+<form name="login" id="login">
+
+<div><label for = 'uid'>아이디</label><input type = "text" name = "uid" id ="uid"></div>
+<div><label for = 'pwd'>비밀번호</label><input type = "password" name = "pwd" id ="pwd"></div>
+<div><label>&nbsp;</label><button type="button" id="lgnokbtn">로그인</button><button type="reset">회원가입</button></div>
+
+</form>
+
+</div>
 <th:block th:include="layout/footer"></th:block>
 
 </div>
 
+
+<script>
+
+	var lgnokbtn = document.getElementById("lgnokbtn");
+	lgnokbtn.addEventListener('click', checkloginform);
+	
+
+function checkloginform() {
+
+	var uid = document.getElementById("uid");
+	var pwd = document.getElementById("pwd");
+	
+		if(uid.value == '') alert('아이디를 입력하세요!');
+		else if(pwd.value == '') alert('비밀번호를 입력하세요!');
+		else { 
+			var frm = document.login;
+			frm.method = 'post';
+			frm.submit();
+		}
+	}
+		
+		
+		
+</script>
 </body>
 </html>

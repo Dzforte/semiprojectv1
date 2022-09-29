@@ -23,6 +23,11 @@ public class MemberController {
 		return "join/login";
 	}
 
+	@PostMapping("/login")
+	public String loginok() {
+		return "redirect:/myinfo";
+	}
+	
 	@GetMapping("/myinfo")
 	public String myinfo() {
 		return "join/myinfo";
