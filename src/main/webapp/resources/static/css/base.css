@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title> 세미프로젝트 </title>
-<style>
 	
 	/* 전체영역 스타일 */
 	#container { width: 950px; margin:0 auto; border: 1px solid red }
@@ -28,21 +22,3 @@
 	a:visited { text-decoration: none; color: black }
 	a:hover { text-decoration: underline; color: red }
 
-
-
-
-</style>
-</head>
-<body>
-
-<div id="container">
-<th:block th:include="layout/header"></th:block>
-<div id="main"></div>
-<th:block th:include="layout/footer"></th:block>
-
-</div>
-
-<h1>Insert title here</h1>
-
-</body>
-</html>
