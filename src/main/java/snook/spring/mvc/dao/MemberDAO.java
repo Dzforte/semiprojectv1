@@ -1,5 +1,9 @@
 package snook.spring.mvc.dao;
 
-public class MemberDAO {
+import snook.spring.mvc.vo.MemberVO;
 
+public interface MemberDAO {
+
+	int insertMember(MemberVO mvo);
+	
 }

@@ -1,5 +1,10 @@
 package snook.spring.mvc.service;
 
-public class MemberService {
+import snook.spring.mvc.vo.MemberVO;
 
+public interface MemberService {
+
+	boolean newMember(MemberVO mvo);
+	
+	
 }
