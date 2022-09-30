@@ -19,7 +19,7 @@ import snook.spring.mvc.vo.BoardVO;
 @Repository("bdao")
 public class BoardDAOImpl implements BoardDAO {
 	
-	//@AutoWired   // bean 태그에 정의한 경우 생략 가능
+	//@Autowired   // bean 태그에 정의한 경우 생략 가능
 	private JdbcTemplate jdbcTemplate;		
 	private SimpleJdbcInsert simpleInsert;
 	private NamedParameterJdbcTemplate jdbcNamedTemplate;
