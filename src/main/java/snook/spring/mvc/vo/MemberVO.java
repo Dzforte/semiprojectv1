@@ -81,6 +81,4 @@ public class MemberVO {
 				+ email + ", regdate=" + regdate + "]";
 	}
 
-	
-	
 }

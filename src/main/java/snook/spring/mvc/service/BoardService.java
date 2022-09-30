@@ -1,5 +1,9 @@
 package snook.spring.mvc.service;
 
-public class BoardService {
+import snook.spring.mvc.vo.BoardVO;
 
+public interface BoardService {
+
+	boolean newBoard(BoardVO bvo);
+	
 }
