@@ -20,6 +20,7 @@
           p:driverClassName="${jdbc.mdrv}" p:url="${jdbc.murl}"
           p:username="${jdbc.musr}" p:password="${jdbc.mpwd}"/>
 
+
     <bean id="jdbcTemplate"
           class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="basicDataSource"/>

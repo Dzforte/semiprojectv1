@@ -31,6 +31,10 @@
 		<level value="info" />
 	</logger>
 
+	<logger name="org.springframework.jdbc">
+		<level value="debug" />
+	</logger>
+
 	<!-- Root Logger -->
 	<root>
 		<priority value="info" />
