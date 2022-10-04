@@ -29,10 +29,18 @@ public class MemberController {
 	
 	
 	@GetMapping("/join")
-	public String join() {  // url만 찍으면 호출할 수 있게 하기 때문에 get 방식
-		LOGGER.info("join호출!");
-		return "join/join";
+	public String join(HttpSession sess) {  // url만 찍으면 호출할 수 있게 하기 때문에 get 방식
+		String returnPage = "join/join";
+		
+		if(sess.getAttribute("m") != null) 
+			returnPage = "redirect:/myinfo";
+		
+		return returnPage;
 	}
+	
+	
+	
+	
 
 	@PostMapping("/join")
 	public String joinok(MemberVO mvo) {  // 회원가입이라서 post 방식 추가
@@ -74,11 +82,21 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	
+	//로그인 상태가 아니라면 -> redirect:/login
+	//로그인 상태이면 -> "join/myinfo
 	@GetMapping("/myinfo")
-	public String myinfo(Model m) {
+	public String myinfo(Model m, HttpSession sess) {
 
-		m.addAttribute("mbr", msrv.readOneMember());
+		String returnPage = "join/myinfo";
 		
-		return "join/myinfo";
+		if(sess.getAttribute("m") != null) {
+			MemberVO mvo = (MemberVO) sess.getAttribute("m");
+			m.addAttribute("mbr", msrv.readOneMember(mvo.getUserid()));
+		} else {
+			returnPage = "redirect:/login";
+		}
+		return returnPage;
 	}
+
 }

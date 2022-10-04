@@ -26,8 +26,8 @@ public class MemberServiceImpl implements MemberService {
 
 	
 	@Override
-	public MemberVO readOneMember() {
-		return mdao.selectOneMember();
+	public MemberVO readOneMember(String uid) {
+		return mdao.selectOneMember(uid);
 	}
 	
 	
@@ -40,5 +40,6 @@ public class MemberServiceImpl implements MemberService {
 		
 		return isLogin;
 	}
+
 	
 }

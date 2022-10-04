@@ -4,10 +4,10 @@ import snook.spring.mvc.vo.MemberVO;
 
 public interface MemberDAO {
 
-	int insertMember(MemberVO mvo);
+    int insertMember(MemberVO mvo);
 
-	MemberVO selectOneMember();
+    MemberVO selectOneMember(String userid);
 
-	int selectOneMember(MemberVO m);
-	
+    int selectOneMember(MemberVO m);
+    
 }

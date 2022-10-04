@@ -6,7 +6,7 @@ public interface MemberService {
 
 	boolean newMember(MemberVO mvo);
 
-	MemberVO readOneMember();
+	MemberVO readOneMember(String uid);
 
 	boolean checkLogin(MemberVO mvo);
 	

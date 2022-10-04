@@ -38,11 +38,13 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public MemberVO selectOneMember() {
+	public MemberVO selectOneMember(String uid) {
 
-		String sql = " select userid, name, email, regdate from member " + " where mno = 1 ";
+		String sql = " select userid, name, email, regdate from member " + " where userid = ? ";
 		
 //		return jdbcNameTemplate.queryForObject(sql, Collections.emptyMap(), memberMapper);
+		
+		Object[] param = { uid };
 		
 		RowMapper<MemberVO> memberMapper = (rs, num) -> {
 			MemberVO m = new MemberVO();
@@ -55,7 +57,7 @@ public class MemberDAOImpl implements MemberDAO {
 			
 		};
 		
-		return jdbcTemplate.queryForObject(sql, null, memberMapper);
+		return jdbcTemplate.queryForObject(sql, param, memberMapper);
 				
 	}
 	
@@ -85,6 +87,5 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return jdbcTemplate.queryForObject(sql, params, Integer.class); // 실행한 값이 정수로 넘어옴 (mapper 필요 없음), *객체로 넘길때는 mapper가 필요함
 	}
-	
 	
 }
