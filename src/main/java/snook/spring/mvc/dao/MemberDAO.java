@@ -7,5 +7,7 @@ public interface MemberDAO {
 	int insertMember(MemberVO mvo);
 
 	MemberVO selectOneMember();
+
+	int selectOneMember(MemberVO m);
 	
 }
