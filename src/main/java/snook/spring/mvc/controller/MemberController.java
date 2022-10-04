@@ -37,9 +37,7 @@ public class MemberController {
 		
 		return returnPage;
 	}
-	
-	
-	
+
 	
 
 	@PostMapping("/join")

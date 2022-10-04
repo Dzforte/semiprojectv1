@@ -1,5 +1,7 @@
 package snook.spring.mvc.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,6 @@ import snook.spring.mvc.vo.BoardVO;
 @Controller
 public class BoardController {
 	
-	private Logger LOGGER = LoggerFactory.getLogger(getClass());
-
 	@Autowired
 	private BoardService bsrv;
 	
@@ -34,8 +34,13 @@ public class BoardController {
 	}
 
 	@GetMapping("/write")
-	public String write() {
-		return "board/write";
+	public String write(HttpSession sess) {
+		
+		String returnPage = "board/write";
+
+		if(sess.getAttribute("m") == null)
+			returnPage = "redirect:/login";
+		return returnPage;
 	}
 	
 	@PostMapping("/write")

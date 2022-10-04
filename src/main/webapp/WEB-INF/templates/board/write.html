@@ -36,7 +36,7 @@
 		<div><label for ="title">제목</label>
 			<input type = "text" name = "title" id="tlt"></div>
 			<div><label for ="uid">작성자</label>
-			<input type = "text" name = "userid" id="uid" value="abc123" readonly="readonly"></div>
+			<input type = "text" name = "userid" id="uid" th:value="${session.m.userid}" readonly="readonly"></div>
 		<div><label for ="cnt" class="dragup">본문</label>
 			<textarea cols="45" rows="7"  name = "contents" id="cnt"></textarea></div>
 		<div><button type="button" id="bdokbtn">입력완료</button>	
@@ -52,6 +52,7 @@
 <th:block layout:fragment="myscript">
 
 <script>
+
 	let bdokbtn= document.getElementById("bdokbtn");
 	bdokbtn.addEventListener('click', checkboardfrm);
 	
