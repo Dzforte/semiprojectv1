@@ -25,7 +25,14 @@
 <th:block layout:fragment="main">
 <div id="main">
 	<h1>게시판 새 글 쓰기</h1>
-	<form name="boardfrm" id="boardfrm">
+	
+	<form th:if=${session.isEmpty()} name="boardfrm" id="boardfrm">
+		<div>
+			로그인이 필요합니다.
+		</div>
+	</form>
+	
+	<form th:unless="${session.isEmpty()}" name="boardfrm" id="boardfrm">
 		<div><label for ="title">제목</label>
 			<input type = "text" name = "title" id="tlt"></div>
 			<div><label for ="uid">작성자</label>
@@ -35,6 +42,9 @@
 		<div><button type="button" id="bdokbtn">입력완료</button>	
 	 		<button type="reset" id="reset">다시쓰기</button></div>
 	</form>
+	
+
+	
 </div>
 
 </th:block>
