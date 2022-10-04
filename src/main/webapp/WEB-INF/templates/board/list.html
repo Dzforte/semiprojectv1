@@ -28,11 +28,7 @@ layout:decorate="~{fragments/layout}">
         	</colgroup>
    			<thead>
    				<tr><td colspan="5" class="newbtn">
-   				<!-- not session isEmpty() -->
-   				<!-- '#strings.isEmpty(session.m) -->
-   				
-   				<div th:if="${session.m != null}"><button type="button" id="newbtn">새글쓰기</button></td></tr></div>
-   				<div th:unless="${session.m != null}">&nbsp;</div>
+ 					<button type="button" id="newbtn" th:disabled="${session.m == null}">새글쓰기</button></td></tr></div>
    				<tr><th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회</th></tr>
    			
    			</thead>     
