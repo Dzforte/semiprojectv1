@@ -30,7 +30,6 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	public BoardDAOImpl(DataSource dataSource) {
 		simpleInsert = new SimpleJdbcInsert(dataSource).withTableName("board").usingColumns("title", "userid", "contents");
-		
 		jdbcNamedTemplate = new NamedParameterJdbcTemplate(dataSource);
 		
 	}
@@ -103,6 +102,15 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		return jdbcNamedTemplate.queryForObject(sql.toString(), params, Integer.class);
               
+	}
+
+	@Override
+	public int DeleteBoard(String bno) {
+		
+		String sql = " delete from board where bno = ? ";
+        Object[] param = new Object[] {bno};        
+        return jdbcTemplate.update(sql, param);
+		
 	}
 
 }

@@ -54,7 +54,8 @@ public class BoardController {
 	public ModelAndView view(ModelAndView mv, String bno) {
 		
 		mv.setViewName("board/view");
-		mv.addObject("bd", bsrv.readOneBoard(bno));
+		mv.addObject("bd", bsrv.readOneBoard(bno));		
+		
 		return mv;
 				
 	}
@@ -73,6 +74,13 @@ public class BoardController {
 	public String writeok(BoardVO bvo) {
 		
 		bsrv.newBoard(bvo);
+		return "redirect:/list?cpg=1";
+	}
+
+	@GetMapping("/del")
+	public String delete(String bno) {
+		
+		bsrv.deleteBoard(bno);
 		return "redirect:/list?cpg=1";
 	}
 	

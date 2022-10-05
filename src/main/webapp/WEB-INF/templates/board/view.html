@@ -57,19 +57,16 @@
 	go2del?.addEventListener('click', go2dels);
 	
 	
-	function go2lists() { location.href="/list"; 
-	
+	function go2lists() { location.href="/list"; 	
 	}
 	
 	function go2upds() {
 		if (confirm('정말로 수정하시겠습니까?')) {
 		location.href= '/upd?bno=[[${param.bno}]]'; 
-
 	}; }
 	
 	function go2dels() {
-		if (confirm('정말로 삭제하시겠습니까?')) {
-			
+		if (confirm('정말로 삭제하시겠습니까?')) {			
 			location.href= '/del?bno=[[${param.bno}]]'; 
 			
 	}; }

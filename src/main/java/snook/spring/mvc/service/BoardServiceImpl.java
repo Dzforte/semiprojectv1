@@ -41,4 +41,17 @@ public class BoardServiceImpl implements BoardService {
 		return bdao.readCountBoard(fkey, fval);
 	}
 
+	@Override
+	public boolean deleteBoard(String bno) {
+
+		boolean isDelete = false;
+		if(bdao.DeleteBoard(bno)>0) isDelete = true;
+		
+		return isDelete;
+		
+		
+	}
+
+	
+	
 }
