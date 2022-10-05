@@ -42,12 +42,10 @@ public class BoardController {
 		int snum = (cpage - 1) * perPage;  // localhost:8080/list가 오류나는 이유 = cpg가 null값이라서...
 		int stpgn = ((cpage - 1) / 10 ) * 10 + 1;  
 		
-		
-		
 		m.addAttribute("pages", bsrv.readCountBoard(fkey, fval));		
 		m.addAttribute("bdlist", bsrv.readBoard(fkey, fval, snum));		// bdlist로 넘김 - html에서 ${}로 받음
 		m.addAttribute("stpgn", stpgn);
-
+		m.addAttribute("fqry", "&fkey="+ fkey +"&fval="+ fval);
 		return "board/list";
 		
 	}
