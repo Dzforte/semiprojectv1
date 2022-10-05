@@ -2,8 +2,6 @@ package snook.spring.mvc.controller;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,9 +36,12 @@ public class BoardController {
 	public String list(Model m, String cpg) {  // url만 찍으면 호출할 수 있게 하기 때문에 get 방식
 	
 		int perPage = 25;
-		int snum = (Integer.parseInt(cpg) - 1) * perPage;
-		
+		if (cpg == null || cpg.equals("")) cpg = "1";  // cpg가 null이면 첫 페이지가 나오게 1로 정의함
+		int cpage = Integer.parseInt(cpg);
+		int snum = (cpage - 1) * perPage;  // localhost:8080/list가 오류나는 이유 = cpg가 null값이라서...
+		int stpgn = ((cpage - 1) / 10 ) * 10 + 1;  
 		m.addAttribute("bdlist", bsrv.readBoard(snum));		// bdlist로 넘김 - html에서 ${}로 받음
+		m.addAttribute("stpgn", stpgn);
 		return "board/list";
 		
 	}
@@ -68,7 +69,7 @@ public class BoardController {
 	public String writeok(BoardVO bvo) {
 		
 		bsrv.newBoard(bvo);
-		return "redirect:/list";
+		return "redirect:/list?cpg=1";
 	}
 	
 }
