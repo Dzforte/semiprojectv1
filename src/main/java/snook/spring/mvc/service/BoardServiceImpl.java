@@ -33,4 +33,10 @@ public class BoardServiceImpl implements BoardService {
 		return bdao.selectOneBoard(bno);
 	}
 
+	@Override
+	public int readCountBoard() {
+		// TODO Auto-generated method stub
+		return bdao.readCountBoard();
+	}
+
 }

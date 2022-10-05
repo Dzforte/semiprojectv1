@@ -1,6 +1,5 @@
 package snook.spring.mvc.dao;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,11 +62,19 @@ public class BoardDAOImpl implements BoardDAO {
 		String sql = " update board set views = views + 1 " + " where bno = ? ";
         Object[] param = {bno};        
         jdbcTemplate.update(sql, param);
-        
-        
+               
         //본문글 가져오기 
         sql = "select bno,title,userid,regdate,views,contents from board where bno=?";
         return jdbcTemplate.queryForObject(sql, param, boardMapper);
     }
+
+	@Override
+	public int readCountBoard() {
+		
+		String sql = "select ceil(count(bno)/25) pages from board";
+		
+		return jdbcTemplate.queryForObject(sql, null, Integer.class);
+              
+	}
 
 }
