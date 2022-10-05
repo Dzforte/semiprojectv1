@@ -9,10 +9,10 @@ public interface BoardDAO {
 
 	int insertBoard(BoardVO bvo);
 
-	List<BoardVO> selectBoard(int snum);
+	List<BoardVO> selectBoard(String fkey, String fval, int snum);
 
 	BoardVO selectOneBoard(String bno);
 
-	int readCountBoard();
+	int readCountBoard(String fkey, String fval);
 
 }

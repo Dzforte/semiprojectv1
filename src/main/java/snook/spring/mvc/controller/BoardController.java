@@ -33,15 +33,19 @@ public class BoardController {
 	/*   */	
 	
 	@GetMapping("/list")
-	public String list(Model m, String cpg) {  // url만 찍으면 호출할 수 있게 하기 때문에 get 방식
+	public String list(Model m, String cpg, String fkey, String fval) {  // url만 찍으면 호출할 수 있게 하기 때문에 get 방식
 	
 		int perPage = 25;
 		if (cpg == null || cpg.equals("")) cpg = "1";  // cpg가 null이면 첫 페이지가 나오게 1로 정의함
+		if (fkey == null) fkey = "";
 		int cpage = Integer.parseInt(cpg);
 		int snum = (cpage - 1) * perPage;  // localhost:8080/list가 오류나는 이유 = cpg가 null값이라서...
 		int stpgn = ((cpage - 1) / 10 ) * 10 + 1;  
-		m.addAttribute("pages", bsrv.readCountBoard());		
-		m.addAttribute("bdlist", bsrv.readBoard(snum));		// bdlist로 넘김 - html에서 ${}로 받음
+		
+		
+		
+		m.addAttribute("pages", bsrv.readCountBoard(fkey, fval));		
+		m.addAttribute("bdlist", bsrv.readBoard(fkey, fval, snum));		// bdlist로 넘김 - html에서 ${}로 받음
 		m.addAttribute("stpgn", stpgn);
 
 		return "board/list";
