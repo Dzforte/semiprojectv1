@@ -9,6 +9,8 @@ public interface MemberService {
 	MemberVO readOneMember(String uid);
 
 	boolean checkLogin(MemberVO mvo);
+
+	String checkUid(String uid);
 	
 	
 }

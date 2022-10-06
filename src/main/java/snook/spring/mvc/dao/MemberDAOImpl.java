@@ -20,7 +20,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	private SimpleJdbcInsert simpleInsert;	
-	private NamedParameterJdbcTemplate jdbcNameTemplate;
+	private NamedParameterJdbcTemplate jdbcNamedTemplate;
 
 	// private RowMapper<MemberVO> memberMapper = BeanPropertyRowMapper.newInstance(MemberVO.class);
 		
@@ -28,7 +28,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberDAOImpl(DataSource dataSource) {
 		simpleInsert = new SimpleJdbcInsert(dataSource).withTableName("member").usingColumns("userid", "passwd", "name", "email");
 	
-		jdbcNameTemplate = new NamedParameterJdbcTemplate(dataSource);
+		jdbcNamedTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 	
 	@Override
@@ -81,11 +81,21 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	@Override
 	public int selectOneMember(MemberVO m) {
+	
 		String sql = "select count(mno) cnt from member where userid = ? and passwd = ? ";
 		
 		Object[] params = {m.getUserid(), m.getPasswd()};
 		
 		return jdbcTemplate.queryForObject(sql, params, Integer.class); // 실행한 값이 정수로 넘어옴 (mapper 필요 없음), *객체로 넘길때는 mapper가 필요함
+	}
+
+	
+	@Override
+	public int selectCountUserid(String uid) {
+
+		String sql = "select count(userid) cnt from member where userid = ?";
+		Object[] param = new Object[] { uid };
+		return jdbcTemplate.queryForObject(sql, param, Integer.class);
 	}
 	
 }

@@ -32,13 +32,18 @@ button { margin-right : 5px}
 <form name="join" id="join">
 
 	<div><label for ="uid">아이디</label>
-	<input type="text" name="userid" id="uid"></div>
+	<input type="text" name="userid" id="uid">
+	<span id="chkmsg"></span>
+	</div>
 	
 	<div><label for ="pwd">비밀번호</label>
 	<input type="password" name="passwd" id="pwd"></div>
 	
 	<div><label for ="repwd">비밀번호 확인</label>
-	<input type="password" name="repwd" id="rpw"></div>
+	<input type="password" name="repwd" id="rpw">
+	<span id="pwdmsg"></span>
+	</div>
+	
 	
 	<div><label for ="nm">이름</label>
 	<input type="text" name="name" id="nm"></div>
@@ -46,6 +51,7 @@ button { margin-right : 5px}
 	<div><label for ="eml">이메일</label>
 	<input type="text" name="email" id="eml"></div>
 	
+	<input type="hidden" name="chkuid" value="no">
 	<div><label>&nbsp;</label><button type="button" id="okbtn">입력완료</button>
 	<button type="reset">다시입력</button></div>
 
@@ -57,10 +63,29 @@ button { margin-right : 5px}
 </div>
 
 <script>
+
+	// 아이디 중복 검사 
+	// /checkuid?uid=??? 형식을 이용해서 중복여부를 확인
+	let userid = document.querySelector("#uid");  // ajax 호출
+	userid.addEventListener('blur', () => { 
+		let qry = '?uid=' + userid.value;
+		fetch('/checkuid' + qry)
+			.then(response => response.text())    // 결과받음 (Ajax)
+			.then(text => checkuserid(text));	  // 함수에 넘김
+	});
 	
+	function checkuserid(result) {
+		
+		let msg = document.querySelector("#chkmsg");		
+		if (result == '1') { msg.innerHTML = '사용불가 아이디입니다!';
+				msg.style.color= 'red';				
+				document.join.chkuid.value = 'no';}
+		else if (result == '0') { msg.innerHTML = '사용가능 아이디입니다!';		
+				msg.style.color= 'blue';
+				document.join.chkuid.value = 'yes';}
+
 	var okbtn = document.getElementById("okbtn");
 	okbtn.addEventListener('click', checkjoinform);
-	
 	
 	function checkjoinform() {
 		var uid = document.getElementById("uid");
@@ -68,6 +93,8 @@ button { margin-right : 5px}
 		var rpw = document.getElementById("rpw");
 		var nm = document.getElementById("nm");
 		var eml = document.getElementById("eml");
+		var frm = document.join;
+		
 		
 		if(uid.value == '') alert('아이디를 입력하세요!');
 		else if(pwd.value == '') alert('비밀번호를 입력하세요!');
@@ -75,15 +102,13 @@ button { margin-right : 5px}
 		else if(pwd.value !== rpw.value) alert('비밀번호가 일치하지 않아요!');
 		else if(nm.value == '') alert('이름을 입력하세요!');
 		else if(eml.value == '') alert('이메일을 입력하세요!');
+		else if(frm.chkuid.value == 'no') alert('아이디 중복체크 하세요...');
 		else { 
-			var frm = document.join;
 			frm.method = 'post';
 			frm.submit();
 		}
 	}
-	
-	
-	
+	}	
 </script>
 
 </body>
