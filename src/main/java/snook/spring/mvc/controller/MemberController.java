@@ -1,5 +1,8 @@
 package snook.spring.mvc.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -10,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import snook.spring.mvc.service.MemberService;
 import snook.spring.mvc.vo.MemberVO;
@@ -99,6 +104,10 @@ public class MemberController {
 	}		
 		
 	//아이디 중복 검사 - REST api 이용
+	//요청 URL : /checkuid?uid=검사할아이디
+	//결과 = 0 : 아이디 사용 가능 
+	//결과 = 1 :	아이디 사용 불가 
+	
 	@ResponseBody
 	@GetMapping("/checkuid")
 	public String checkuid(String uid) {
@@ -113,7 +122,21 @@ public class MemberController {
 		
 	}
 	
-	
-	
+
+	//우편번호 검색
+	// 요청 URL : /findzip?dong=조회할_동이름
+	// 요청결과 : JSON
+	@ResponseBody
+	@GetMapping("/findzip")
+    public void findzip(String dong, HttpServletResponse res) throws IOException {
+   
+		// 응답유형을 json으로 설정
+		res.setContentType("application/json; charset=UTF-8");
+		
+		// 응답결과를 뷰 없이 브라우저로 바로 출력
+		res.getWriter().print(
+		msrv.findZipcode(dong));
+        
+    }
 
 }
