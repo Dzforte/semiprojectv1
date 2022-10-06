@@ -68,10 +68,30 @@ button { margin-right : 5px}
 	// /checkuid?uid=??? 형식을 이용해서 중복여부를 확인
 	let userid = document.querySelector("#uid");  // ajax 호출
 	userid.addEventListener('blur', () => { 
+		
 		let qry = '?uid=' + userid.value;
-		fetch('/checkuid' + qry)
-			.then(response => response.text())    // 결과받음 (Ajax)
-			.then(text => checkuserid(text));	  // 함수에 넘김
+		
+		let req = new XMLHttpRequest();  // 1. ajax 객체 생성
+		req.onreadystatechange = () => { // 4. 응답을 받은 후 처리
+	
+			// readyState : 0, 1(서버연결), 2(요청 보냄), 3(요청 처리), 4(처리완료, 응답완료)
+						
+			if(req.readyState == XMLHttpRequest.DONE) {
+
+			if (req.status == 200) {
+				let text = req.response;
+				checkuserid(text);
+			}
+		}
+	};
+		
+		req.open('get','/checkuid' + qry);  // 2. 서버 요청 방식 정의
+		req.send();							// 3. 서버 요청 보냄 //
+		
+		
+	//	fetch('/checkuid' + qry) // ajax 호출
+	//		.then(response => response.text())    // 결과받음 (Ajax)
+	//		.then(text => checkuserid(text));	  // 함수에 넘김
 	});
 	
 	function checkuserid(result) {
