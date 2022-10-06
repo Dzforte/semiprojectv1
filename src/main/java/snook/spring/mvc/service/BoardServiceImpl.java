@@ -45,10 +45,22 @@ public class BoardServiceImpl implements BoardService {
 	public boolean deleteBoard(String bno) {
 
 		boolean isDelete = false;
-		if(bdao.DeleteBoard(bno)>0) isDelete = true;
+		if(bdao.deleteBoard(bno)>0) isDelete = true;
 		
 		return isDelete;
 		
+		
+	}
+
+	@Override
+	public boolean modifyBoard(BoardVO bvo) {
+
+		boolean isUpdate = false;
+
+		if(bdao.updateBoard(bvo)>0) isUpdate = true;
+		
+		return isUpdate;	
+
 		
 	}
 

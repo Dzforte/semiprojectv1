@@ -105,12 +105,25 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public int DeleteBoard(String bno) {
+	public int deleteBoard(String bno) {
 		
 		String sql = " delete from board where bno = ? ";
         Object[] param = new Object[] {bno};        
         return jdbcTemplate.update(sql, param);
 		
 	}
+
+    @Override
+    public int updateBoard(BoardVO bvo) {
+        // 제목, 본문, 수정한 날짜/시간을 수정함
+        String sql = "update board set title= :title, contents= :contents, regdate= current_timestamp() where bno= :bno";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("title", bvo.getTitle());
+        params.put("contents", bvo.getContents());
+        params.put("bno", bvo.getBno());
+                
+        return jdbcNamedTemplate.update(sql, params);
+    }
 
 }
